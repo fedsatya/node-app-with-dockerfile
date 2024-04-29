@@ -13,12 +13,11 @@ RUN npm ci
 # Copy the application code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Build the applicati
 
 # Expose the port that the Express.js application will run on
-EXPOSE 3000
+
 
 # Start the Express.js application
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
 
