@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: docker-app
-        image: docker/getting-started
+        image: fedsatya/node-docker-image
         volumeMounts:
         - name: db-connection
           mountPath: /opt
