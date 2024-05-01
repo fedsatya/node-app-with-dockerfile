@@ -1,13 +1,13 @@
-name: ndoe docker workflow
+name: node docker workflow
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: node:14
+    container: node:alpine
     steps:
       - name: Checkout
         uses: actions/checkout@v3
