@@ -16,5 +16,20 @@ pipeline {
         sh 'npx eslint .'
       }
     }
+    stage('Build and Push Docker Image') {
+        environment {
+            DOCKERHUB_CREDENTIALS = credentials('docker-cred')
+        }
+        steps {
+            script {
+                docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
+                    // Build the Docker image from the Dockerfile in the root directory
+                    sh 'docker build -t fedsatya/node-docker-jenkins .'
+                    // Push the image to your DockerHub repository
+                    sh 'docker push fedsatya/node-docker-jenkins'
+                }
+            }
+        }
+     }
   }
 }
