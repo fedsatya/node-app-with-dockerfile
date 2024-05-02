@@ -1,11 +1,14 @@
 pipeline {
   agent {
-    docker { image 'node:alpine3.14' }
+    docker { 
+      image 'node:alpine3.14' 
+      args '-u root'
+    }
   }
   stages {
     stage('Install') {
       steps {
-        sh 'npm install'
+        sh 'npm ci'
       }
     }
     stage('Lint') {
