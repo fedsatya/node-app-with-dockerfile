@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker { 
-      image 'node:alpine3.14' 
+      image 'node:alpine' 
       args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
