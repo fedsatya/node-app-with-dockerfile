@@ -5,6 +5,11 @@ pipeline {
       args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
+  environment {
+        registry = "fedsatya/node-jenkins-image" // Define the Docker Hub account/repository
+        registryCredential = 'docker-cred' // Specify the Jenkins credentials ID for Docker Hub
+        dockerImage = '' // Variable to store the Docker image name
+    }
   stages {
     stage('Install') {
       steps {
@@ -19,15 +24,15 @@ pipeline {
     stage('Build Docker Image') {
       steps {
           script {
-              docker.build("fedsatya/node-jenkins-image") 
+              dockerImage = docker.build registry + ":latest" // Build the Docker image with the specified tag
           }
       }
     }
     stage('Push Docker Image') {
       steps {
           script {
-              docker.withRegistry('https://hub.docker.com/', 'docker-cred') {
-                docker.image("fedsatya/node-jenkins-image).push()
+              docker.withRegistry('', registryCredential) {
+                dockerImage.push() // Push the Docker image to the Docker Hub repository
               }
           }
       }
