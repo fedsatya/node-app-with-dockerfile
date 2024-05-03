@@ -21,6 +21,11 @@ pipeline {
         sh 'npx eslint .'
       }
     }
+    stage('Check Docker Version') {
+      steps {
+        sh 'docker --version'
+      }
+    }
     stage('Build Docker Image') {
       steps {
           script {
